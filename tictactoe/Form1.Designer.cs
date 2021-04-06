@@ -37,15 +37,16 @@ namespace tictactoe
             // 
             // panel1
             // 
-            this.panel1.Location = new System.Drawing.Point(29, 69);
+            this.panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panel1.Location = new System.Drawing.Point(43, 68);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1076, 1043);
+            this.panel1.Size = new System.Drawing.Size(505, 460);
             this.panel1.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1236, 135);
+            this.label1.Location = new System.Drawing.Point(676, 45);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(89, 37);
             this.label1.TabIndex = 1;
@@ -54,16 +55,16 @@ namespace tictactoe
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button1.Location = new System.Drawing.Point(1211, 217);
+            this.button1.Location = new System.Drawing.Point(659, 128);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(152, 163);
+            this.button1.Size = new System.Drawing.Size(149, 163);
             this.button1.TabIndex = 2;
             this.button1.Text = "X";
             this.button1.UseVisualStyleBackColor = true;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(1236, 776);
+            this.button2.Location = new System.Drawing.Point(659, 390);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(169, 52);
             this.button2.TabIndex = 3;
@@ -75,11 +76,11 @@ namespace tictactoe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(15F, 37F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1442, 1165);
+            this.ClientSize = new System.Drawing.Size(1077, 668);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.panel1);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);

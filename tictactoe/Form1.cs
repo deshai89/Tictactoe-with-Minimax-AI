@@ -28,10 +28,10 @@ namespace tictactoe
                 for (int j = 0; j < 3; j++)
                 {
                     buttons[i, j] = new Button();
-                    buttons[i, j].Size = new Size(300, 300);
-                    buttons[i, j].Location = new Point(i * 300, j * 300);
+                    buttons[i, j].Size = new Size(150, 150);
+                    buttons[i, j].Location = new Point(i * 150, j * 150);
                     buttons[i, j].FlatStyle = FlatStyle.Flat;
-                    buttons[i, j].Font = new System.Drawing.Font(DefaultFont.FontFamily, 80, FontStyle.Bold);
+                    buttons[i, j].Font = new System.Drawing.Font(DefaultFont.FontFamily, 41, FontStyle.Bold);
                     buttons[i, j].Click += new EventHandler(button_c);
 
                     panel1.Controls.Add(buttons[i, j]);
