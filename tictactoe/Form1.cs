@@ -16,22 +16,21 @@ namespace tictactoe
         {
             InitializeComponent();
             genButtons();
-
-
         }
-        string[,] board = new string[,]
-        {
-            {"", "", ""},
-            {"", "", ""},
-            {"", "", ""},
+         string[,] board = new string[,]
+        {                                       // i is the first #, j is 2nd 
+            {"", "", ""},                       // 00 10 20
+            {"", "", ""},                       // 01 11 21
+            {"", "", ""},                       // 02 12 20
         };
 
-        bool gameover = false;
-        int depth;
-        string checker;
+        Random random_move = new Random();
+        bool gameover;
+        bool human_players;
+        bool ai_player = false;
         string ai = "X";
         string human = "O";
-
+        
         Button[,] buttons = new Button[3, 3];
         
         private void genButtons()
@@ -46,47 +45,83 @@ namespace tictactoe
                     buttons[i, j].FlatStyle = FlatStyle.Flat;
                     buttons[i, j].Font = new System.Drawing.Font(DefaultFont.FontFamily, 41, FontStyle.Bold);
                     buttons[i, j].Click += new EventHandler(button_c);
-                    //buttons[i, j].TextAlign = ContentAlignment.TopCenter;
-                    
+
                     panel1.Controls.Add(buttons[i, j]);
+
                     
+
                 }
             }
-        }
-
-       
+        }      
 
         void button_c(object sender, EventArgs e)
         {
             Button button = sender as Button;
 
-            if (button.Text != "")
+            if(human_players)                   //2 player button clicks
             {
+                if (button.Text != "")
+                {
+                    return;
+                }
+
+                button.Text = X_O_display_button.Text;
+                switchPlayer();
+                if(gameover == true)
+                {
+                    
+                    gameover = false;
+                }
                 return;
             }
 
-            button.Text = button1.Text;
-            switchPlayer();
-            if(gameover == true)
+                                                    //human clicks versus AI
+            if(X_O_display_button.Text == human)
             {
-                gameover = false;
+                if(button.Text == "")
+                {
+                    button.Text = human;
+                    for (int i = 0; i < 3; i++)
+                    {
+                        for (int j = 0; j < 3; j++)
+                        {
+                            if (buttons[i, j].Text == human && board[i, j] == "")
+                            {
+                                board[i, j] = human;
+                            }
+                        }
+                    }
+                        switchPlayer();
+                    if (ai_player)
+                    {
+                        best();
+                    }
+ 
+                }
             }
+                
         }
 
         private void switchPlayer()
         {
-
             checkIfgameEnds();
-            if (button1.Text == ai && gameover == false)
+
+            if(gameover)
+                {
+                    gameover = false;
+                     return;
+                }
+
+            if (X_O_display_button.Text == ai && gameover == false)
             {
-                button1.Text = human;
+                X_O_display_button.Text = human;
             }
-            else if (button1.Text != ai && gameover == false)
+            else if (X_O_display_button.Text != ai && gameover == false)
             {
-                button1.Text = ai;
+                X_O_display_button.Text = ai;
             }
 
-            if (button1.Text == ai)
+            if (X_O_display_button.Text == ai)
             {
                 label2.Text = ai + "'s turn";
             }
@@ -96,95 +131,140 @@ namespace tictactoe
         private string checkIfgameEnds()
         {
             List<Button> winnerButtons = new List<Button>();
-           string winner = null;
+            string winner = null;
+            string player_check = X_O_display_button.Text;
 
-            //vertical win
+            
+                                                                    //horizontal
+            for(int i = 0; i < 3; i++)
+            {
+                if(board[0,i] == board[1,i] && board[0,i] == board[2,i] && board[0,i] != "")
+                {
+                    winner = board[0, i];
+                }
+            }
+                                                                    //vertical
             for (int i = 0; i < 3; i++)
             {
-                for(int j = 0; j < 3; j++)
+                if (board[i, 0] == board[i, 1] && board[i, 0] == board[i, 2] && board[i,0] != "")
                 {
-                    if(board[i,j] != button1.Text)
+                    winner = board[i, 0];
+                }
+            }
+
+                                                                    //diag right
+            
+                if (board[1, 1] == board[0, 0] && board[1, 1] == board[2, 2] && board[1,1] != "")
+                {
+                    winner = board[1,1];
+                }
+
+                                                                    //diag2 left
+
+            if (board[1, 1] == board[2, 0] && board[1, 1] == board[0, 2] && board[1,1] != "")
+            {
+                winner = board[1, 1];
+            }
+            
+                                                                    //vertical win
+            for (int i = 0; i < 3; i++)
+            {
+                winnerButtons = new List<Button>();
+                for (int j = 0; j < 3; j++)
+                {
+                    if (buttons[i, j].Text != X_O_display_button.Text)
                     {
                         break;
                     }
                     winnerButtons.Add(buttons[i, j]);
                     if (j == 2)
                     {
-                        //showwinner(winnerButtons);
-                        winner = board[0, i];
+                        showwinner(winnerButtons);
+                        return null;
 
                     }
                 }
-            }
-            //horizontal win
+            }  
+            
+                                                                    //horizontal win
             for (int i = 0; i < 3; i++)
             {
                 winnerButtons = new List<Button>();
                 for(int j = 0; j < 3; j++)
                 {
-                    if(board[j, i] != button1.Text)
+                    if(buttons[j, i].Text != X_O_display_button.Text)
                     {
                         break;
                     }
+
                     winnerButtons.Add(buttons[j, i]);
                     if(j == 2)
                     {
-                        //showwinner(winnerButtons);
-                        winner = board[i, 0];
-
+                        showwinner(winnerButtons);
+                        return null;
                     }
                 }
             }
-            //diagonal win
+           
+                                                                    //diagonal win
             winnerButtons = new List<Button>();
             for(int i = 0, j = 0; i < 3; i++, j++)
             {
-                if(buttons[i, j].Text != button1.Text)
+                if(buttons[i, j].Text != X_O_display_button.Text)
                 {
                     break;
                 }
                 winnerButtons.Add(buttons[i, j]);
                 if(j ==2)
                 {
-                    showwinner(winnerButtons);
-                    winner = board[0,0];
+                   showwinner(winnerButtons);
 
+                    return null;
                 }
             }
-            //diagonal win
+                                                                     //diagonal win
             winnerButtons = new List<Button>();
             for (int i = 2, j = 0; j < 3; i--, j++)
             {
-                if (buttons[i, j].Text != button1.Text)
+                if (buttons[i, j].Text != X_O_display_button.Text)
                 {
                     break;
                 }
                 winnerButtons.Add(buttons[i, j]);
                 if (j == 2)
                 {
-                    showwinner(winnerButtons);
-                    winner = board[2, 0];
+                   showwinner(winnerButtons);
+                    return null;
                 }
             }
 
-            foreach(var button in buttons)
+            if (winner != null)
             {
-                if (button.Text == "")
-                    return winner;
-                    
+                return winner;
             }
-            
-            MessageBox.Show("Tie Game!");
-            gameover = true;
-            return "Tie";
-            //Reset();
-            
 
+            if (human_players || ai_player)
+            {
+                foreach (var button in buttons)
+                {
+                    if(button.Text == "")
+                    {
+                        return null;
+                    }
+  
+                }
+                    MessageBox.Show("Tie Game!");
+                    Reset();
+                    gameover = true;
+                    return null;
+            }
+
+            return "Tie";
         }
         private void showwinner(List<Button> winnerButtons)
         {
             gameover = true;
-            if (button1.Text == "X")
+            if (X_O_display_button.Text == "X")
             {
                 foreach (var button in winnerButtons)
                 {
@@ -196,8 +276,8 @@ namespace tictactoe
                     button.BackColor = Color.Blue;
                 }
 
-            MessageBox.Show("Player " + button1.Text + " wins");
-            Reset();
+            MessageBox.Show("Player " + X_O_display_button.Text + " wins");
+           Reset();
 
         }
 
@@ -206,65 +286,88 @@ namespace tictactoe
             this.Controls.Clear();
             this.InitializeComponent();
             genButtons();
-            gameover = false;
-
             
-        }
-
-        void best()
-        {
-            int bestscore = -0;
-            int[] move = { 0, 0 };
-            for (int i = 0; i < 3; i++)
+            for(int i = 0; i < 3; i++)
             {
-
                 for (int j = 0; j < 3; j++)
                 {
-                    if (gameover == true)
-                    { return; }
+                    board[i, j] = "";
+                }
+            }
+            if (human_players)
+            {
+                human_button.BackColor = SystemColors.MenuHighlight;
+                X_O_display_button.Text = ai;
+                label2.Text = "X's turn";
+
+            }
+            if(ai_player)                           
+            {
+                AI_button.BackColor = SystemColors.MenuHighlight;
+                random_gen();
+                switchPlayer();
+                //best();
+            }
+        }
+
+        void best()                             //best move for AI
+        {
+            int bestscore = -10000;
+            int[] move = new int[2];
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+
                     if (board[i, j] == "")
                     {
                         board[i, j] = ai;
                         int score = minimax(board, 0, false);
-                        //if (score == 0) { return; }
                         board[i, j] = "";
                         if (score > bestscore)
                         {
                             bestscore = score;
                             move[0] = i;
                             move[1] = j;
+
                         }
                     }
                 }
             }
-            if (gameover == true)
-            { return; }
             board[move[0], move[1]] = ai;
             buttons[move[0], move[1]].Text = ai;
+            
             switchPlayer();
+            
         }
 
-        
+        public void random_gen()
+        {
+            int random_number1 = random_move.Next(0, 3);               //random first move after activation or reset
+            int random_number2 = random_move.Next(0, 3);
+            buttons[random_number1, random_number2].Text = ai;
+            board[random_number1, random_number2] = ai;
 
-        public int minimax(string[,] board, int depth, bool maxx)
-        {            
+        }
+
+        public int minimax(string[,] board, int depth, bool maxx)       //minimax for Ai if it is player X
+        {       
+           
             string result = checkIfgameEnds();
 
-            int bestscore = -0;
-            var hello = new Dictionary<string, int>();
-            hello["X"] = 10;
-            hello["O"] = -10;
-            hello["Tie"] = 0;
-            
-            
+            var ai_scores = new Dictionary<string, int>();      
+            ai_scores["X"] = 1500;
+            ai_scores["O"] = -10;
+            ai_scores["Tie"] = 0;
+
             if (result != null)
             {
-                return hello[checkIfgameEnds()];      //result comes out as "" which is wrong and causes error
+                return ai_scores[checkIfgameEnds()];      
             }
 
             if (maxx) 
             {
-                bestscore = -0;
+                int bestscore = -1;                     //finds best move for AI
                 for(int i = 0; i < 3; i++)
                 {
                     for(int j = 0; j < 3; j++)
@@ -274,7 +377,7 @@ namespace tictactoe
                             board[i, j] = ai;
                             //button1.Text = human;
                             int score = minimax(board, depth + 1, false);
-                            buttons[i, j].Text = "";
+                            //buttons[i, j].Text = "";
                             board[i, j] = "";
                             bestscore = Math.Max(score, bestscore);
                             
@@ -284,7 +387,7 @@ namespace tictactoe
                 return bestscore;
             }
             else {
-                bestscore = 0;
+               int bestscore = 1;                   //finds worst move for human
                 for (int i = 0; i < 3; i++)
                 {
                     for (int j = 0; j < 3; j++)
@@ -299,15 +402,48 @@ namespace tictactoe
                         }
                     }
                 }
-            }
-            return bestscore;
+                    return bestscore;
+            } 
             
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)          //ai activation toggle button
         {
-            best();
+            if(X_O_display_button.Text == ai || !ai_player)
+            {
+                AI_button.BackColor = SystemColors.MenuHighlight;
+                random_gen();
+                switchPlayer();
+                //best();
+            }
+            if(ai_player)                                               //turns off ai 
+            {
+                ai_player = false;
+                AI_button.BackColor = SystemColors.ControlLight;
+                return;
+            }
+            ai_player = true;
+        }
+
+        private void button3_Click(object sender, EventArgs e)          //reset button
+        {
+            Reset();
             
+        }
+
+        private void human_button_Click(object sender, EventArgs e)     // human vs human toggle button
+        {
+            if (human_players)
+            {
+                human_players = false;
+                label2.Text = "Choose game type";
+                human_button.BackColor = SystemColors.ControlLight;
+                return;
+            }
+
+            human_players = true;
+            label2.Text = "X's turn";
+            human_button.BackColor = SystemColors.MenuHighlight;
         }
     }
 }
