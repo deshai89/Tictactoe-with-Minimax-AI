@@ -33,9 +33,9 @@ namespace tictactoe
             this.label1 = new System.Windows.Forms.Label();
             this.X_O_display_button = new System.Windows.Forms.Button();
             this.AI_button = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
+            this.reset_btn = new System.Windows.Forms.Button();
             this.human_button = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // panel1
@@ -75,26 +75,17 @@ namespace tictactoe
             this.AI_button.TabIndex = 3;
             this.AI_button.Text = "AI";
             this.AI_button.UseVisualStyleBackColor = false;
-            this.AI_button.Click += new System.EventHandler(this.button2_Click);
+            this.AI_button.Click += new System.EventHandler(this.ai_button_Click);
             // 
-            // label2
+            // reset_btn
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(1040, 478);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(239, 37);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Choose game type";
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(1054, 676);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(169, 52);
-            this.button3.TabIndex = 5;
-            this.button3.Text = "Reset";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.reset_btn.Location = new System.Drawing.Point(1054, 676);
+            this.reset_btn.Name = "reset_btn";
+            this.reset_btn.Size = new System.Drawing.Size(169, 52);
+            this.reset_btn.TabIndex = 5;
+            this.reset_btn.Text = "Reset";
+            this.reset_btn.UseVisualStyleBackColor = true;
+            this.reset_btn.Click += new System.EventHandler(this.reset_Click);
             // 
             // human_button
             // 
@@ -107,14 +98,23 @@ namespace tictactoe
             this.human_button.UseVisualStyleBackColor = false;
             this.human_button.Click += new System.EventHandler(this.human_button_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(1035, 488);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(239, 37);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Choose game type";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(15F, 37F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1462, 813);
-            this.Controls.Add(this.human_button);
-            this.Controls.Add(this.button3);
             this.Controls.Add(this.label2);
+            this.Controls.Add(this.human_button);
+            this.Controls.Add(this.reset_btn);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.AI_button);
             this.Controls.Add(this.X_O_display_button);
@@ -132,9 +132,9 @@ namespace tictactoe
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button X_O_display_button;
         private System.Windows.Forms.Button AI_button;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button reset_btn;
         private System.Windows.Forms.Button human_button;
+        private System.Windows.Forms.Label label2;
     }
 }
 
