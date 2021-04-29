@@ -44,7 +44,7 @@ namespace tictactoe
             this.panel1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.panel1.Location = new System.Drawing.Point(119, 106);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(650, 648);
+            this.panel1.Size = new System.Drawing.Size(706, 622);
             this.panel1.TabIndex = 0;
             // 
             // label1
@@ -111,7 +111,7 @@ namespace tictactoe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(15F, 37F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1462, 813);
+            this.ClientSize = new System.Drawing.Size(1492, 858);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.human_button);
             this.Controls.Add(this.reset_btn);

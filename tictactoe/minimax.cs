@@ -48,7 +48,7 @@ namespace tictactoe
             string result = checkIfgameEnds(buttons, display, board3, true);
             
             var ai_scores = new Dictionary<string, int>();
-            ai_scores["X"] = 1500;                          //changed values to help it prioritize winning over stopping human from winning
+            ai_scores["X"] = 1500;                          
             ai_scores["O"] = -10;
             ai_scores["Tie"] = 0;
 
