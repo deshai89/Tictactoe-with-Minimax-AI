@@ -111,7 +111,7 @@ namespace tictactoe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(15F, 37F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1492, 858);
+            this.ClientSize = new System.Drawing.Size(1619, 945);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.human_button);
             this.Controls.Add(this.reset_btn);
