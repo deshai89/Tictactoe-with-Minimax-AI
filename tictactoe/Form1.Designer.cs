@@ -40,17 +40,18 @@ namespace tictactoe
             // 
             // panel1
             // 
+            this.panel1.AutoSize = true;
             this.panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panel1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.panel1.Location = new System.Drawing.Point(119, 106);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(706, 622);
+            this.panel1.Size = new System.Drawing.Size(0, 0);
             this.panel1.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(933, 106);
+            this.label1.Location = new System.Drawing.Point(1097, 106);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(89, 37);
             this.label1.TabIndex = 1;
@@ -59,7 +60,7 @@ namespace tictactoe
             // X_O_display_button
             // 
             this.X_O_display_button.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.X_O_display_button.Location = new System.Drawing.Point(933, 195);
+            this.X_O_display_button.Location = new System.Drawing.Point(1022, 156);
             this.X_O_display_button.Name = "X_O_display_button";
             this.X_O_display_button.Size = new System.Drawing.Size(233, 225);
             this.X_O_display_button.TabIndex = 2;
@@ -69,7 +70,7 @@ namespace tictactoe
             // AI_button
             // 
             this.AI_button.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.AI_button.Location = new System.Drawing.Point(933, 552);
+            this.AI_button.Location = new System.Drawing.Point(970, 478);
             this.AI_button.Name = "AI_button";
             this.AI_button.Size = new System.Drawing.Size(169, 52);
             this.AI_button.TabIndex = 3;
@@ -79,7 +80,7 @@ namespace tictactoe
             // 
             // reset_btn
             // 
-            this.reset_btn.Location = new System.Drawing.Point(1054, 676);
+            this.reset_btn.Location = new System.Drawing.Point(1069, 641);
             this.reset_btn.Name = "reset_btn";
             this.reset_btn.Size = new System.Drawing.Size(169, 52);
             this.reset_btn.TabIndex = 5;
@@ -90,7 +91,7 @@ namespace tictactoe
             // human_button
             // 
             this.human_button.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.human_button.Location = new System.Drawing.Point(1186, 552);
+            this.human_button.Location = new System.Drawing.Point(1185, 478);
             this.human_button.Name = "human_button";
             this.human_button.Size = new System.Drawing.Size(169, 52);
             this.human_button.TabIndex = 6;
@@ -101,7 +102,7 @@ namespace tictactoe
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(1035, 488);
+            this.label2.Location = new System.Drawing.Point(1022, 411);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(239, 37);
             this.label2.TabIndex = 7;
