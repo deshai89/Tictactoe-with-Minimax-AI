@@ -52,7 +52,7 @@ namespace tictactoe
             ai_scores["O"] = -10;
             ai_scores["Tie"] = 0;
 
-            //if(ai = "O")                          //for O minimax
+            //if(ai = "O")                          //for "O" minimax
             //{
               //  ai_scores["O"] = 1500;                          
                // ai_scores["X"] = -10;
