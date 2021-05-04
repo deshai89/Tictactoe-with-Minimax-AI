@@ -218,6 +218,10 @@ namespace tictactoe
 
         private void ai_button_Click(object sender, EventArgs e)          //ai activation toggle button
         {
+            if (human_Players)
+            {
+                return;     //keeps both buttons from be active
+            }
             minimax ai_Minimax = new minimax();
 
             if (X_O_display_button.Text == human && ai_Player)
@@ -249,6 +253,10 @@ namespace tictactoe
 
         private void human_button_Click(object sender, EventArgs e)     // human vs human toggle button
         {
+            if (ai_Player)
+            {
+                return;     //keeps both buttons from be active
+            }
             if (human_Players)
             {
                 human_Players = false;
