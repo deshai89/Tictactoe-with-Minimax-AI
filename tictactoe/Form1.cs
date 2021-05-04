@@ -65,6 +65,16 @@ namespace tictactoe
                 }
 
                 button.Text = X_O_display_button.Text;
+                for (int i = 0; i < 3; i++)
+                {
+                    for (int j = 0; j < 3; j++)
+                    {
+                        if (buttons[i, j].Text != "")
+                        {
+                            evaluation_Board[i, j] = buttons[i, j].Text;
+                        }
+                    }
+                }
                 switchPlayer();
                 if (gameover == true)
                 {
