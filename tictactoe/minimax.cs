@@ -179,7 +179,7 @@ namespace tictactoe
                     winnerButtons.Add(buttons[j, i]);
                     if (j == 2)
                     {
-                        player_winner = buttons[i, j].Text;
+                        player_winner = buttons[j, i].Text;
                         form1_Copy.showwinner(winnerButtons, player_winner);
                         gameover = true;
                         return null;

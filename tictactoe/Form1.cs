@@ -22,7 +22,7 @@ namespace tictactoe
        {                                        // i is the first #, j is 2nd 
             {"", "", ""},                       // 00 10 20
             {"", "", ""},                       // 01 11 21
-            {"", "", ""},                       // 02 12 20
+            {"", "", ""},                       // 02 12 22
        };
 
         Random random_Move = new Random();
