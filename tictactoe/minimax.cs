@@ -8,14 +8,14 @@ namespace tictactoe
     class Minimax : Form
     {
 
-        Game_form form1_Copy = new Game_form();
+        Game_form Gameform_Copy = new Game_form();
         public bool gameover = false;
         public string winnersPiece;
         public string ai;
         public string human;
         
 
-        public int[] best(string[,] copy_Board, Button[,] buttons, string display)                 //best move for AI
+        public int[] Ai_bestMove(string[,] copy_Board, Button[,] buttons, string display)                 //best move for AI
         {
             int bestscore = -10000;        //10000
             int[] move = new int[2];
@@ -28,7 +28,7 @@ namespace tictactoe
                     if (copy_Board[i, j] == "")
                     {
                         copy_Board[i, j] = display;
-                        int score = minimax_Ai(copy_Board, 0, false, buttons, display);
+                        int score = Minimax_Ai(copy_Board, 0, false, buttons, display);
                         copy_Board[i, j] = "";
                         if (score > bestscore)
                         {
@@ -46,18 +46,15 @@ namespace tictactoe
 
 
 
-        public int minimax_Ai(string[,] board3, int depth, bool maxx, Button[,] buttons, string display )       //minimax for Ai
+        public int Minimax_Ai(string[,] board3, int depth, bool maxx, Button[,] buttons, string display )       //minimax for Ai
         {
             
-            string result = checkIfgameEnds(buttons, display, board3, true, "");
+            string result = CheckIfgameEnds(buttons, display, board3, true, "");
             
             var ai_scores = new Dictionary<string, int>();
 
-           // ai_scores["X"] = 1500;
-           // ai_scores["O"] = -10;
-           // ai_scores["Tie"] = 0;
 
-            if (display == "X")
+            if (display == "X")             //for "X" minimax
             {
                 ai = "X";
                 human = "O";
@@ -75,7 +72,7 @@ namespace tictactoe
            
             if (result != null)
             {
-               return ai_scores[checkIfgameEnds(buttons, display, board3, true, "")]; 
+               return ai_scores[CheckIfgameEnds(buttons, display, board3, true, "")]; 
             }
 
             if (maxx)
@@ -88,7 +85,7 @@ namespace tictactoe
                         if (board3[i, j] == "")
                         {
                             board3[i, j] = ai;
-                            int score = minimax_Ai(board3, depth + 1, false, buttons, display);
+                            int score = Minimax_Ai(board3, depth + 1, false, buttons, display);
                             board3[i, j] = "";
                             bestscore = Math.Max(score, bestscore);
 
@@ -107,7 +104,7 @@ namespace tictactoe
                         if (board3[i, j] == "")
                         {
                             board3[i, j] = human;
-                            int score = minimax_Ai(board3, depth + 1, true, buttons, display);
+                            int score = Minimax_Ai(board3, depth + 1, true, buttons, display);
                             board3[i, j] = "";
                             bestscore = Math.Min(score, bestscore);
 
@@ -120,7 +117,7 @@ namespace tictactoe
         
 
 
-        public string checkIfgameEnds(Button[,] buttons, string display, string[,] evaluation_Board, bool gameType, string playerNumber)
+        public string CheckIfgameEnds(Button[,] buttons, string display, string[,] evaluation_Board, bool gameType, string playerNumber)
         {
             List<Button> winnerButtons = new List<Button>();
             string winner = null;
@@ -171,7 +168,7 @@ namespace tictactoe
                     if (j == 2)
                     {
                         winnersPiece = buttons[i, j].Text;
-                        form1_Copy.showwinner(winnerButtons, winnersPiece, playerNumber);
+                        Gameform_Copy.showwinner(winnerButtons, winnersPiece, playerNumber);
                         gameover = true;
                         return null;
 
@@ -194,7 +191,7 @@ namespace tictactoe
                     if (j == 2)
                     {
                         winnersPiece = buttons[j, i].Text;
-                        form1_Copy.showwinner(winnerButtons, winnersPiece, playerNumber);
+                        Gameform_Copy.showwinner(winnerButtons, winnersPiece, playerNumber);
                         gameover = true;
                         return null;
                     }
@@ -213,7 +210,7 @@ namespace tictactoe
                 if (j == 2)
                 {
                     winnersPiece = buttons[i, j].Text;
-                    form1_Copy.showwinner(winnerButtons, winnersPiece, playerNumber);
+                    Gameform_Copy.showwinner(winnerButtons, winnersPiece, playerNumber);
                     gameover = true;
                     return null;
                 }
@@ -230,7 +227,7 @@ namespace tictactoe
                 if (j == 2)
                 {
                     winnersPiece = buttons[i, j].Text;
-                    form1_Copy.showwinner(winnerButtons, winnersPiece, playerNumber);
+                    Gameform_Copy.showwinner(winnerButtons, winnersPiece, playerNumber);
                     gameover = true;
                     return null;
                 }

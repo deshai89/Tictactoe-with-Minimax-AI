@@ -16,7 +16,7 @@ namespace tictactoe
         public Game_form()
         {
             InitializeComponent();
-            genButtons();
+            GenButtons();
             
         }
        public string[,] evaluation_Board = new string[,]                            //what ai uses to determine best move
@@ -33,22 +33,24 @@ namespace tictactoe
         public string ai;
         public string human;
         public int oWinsCount, xWinsCount, tiesCount = 0;
-        public string saveStuff;
+        public string SaveRecords;
 
         
         Button[,] buttons = new Button[3, 3];
         
-        private void genButtons()
+        private void GenButtons()
         {
             for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    buttons[i, j] = new Button();
-                    buttons[i, j].Size = new Size(150, 150);
-                    buttons[i, j].Location = new Point(i * 150, j * 150);
-                    buttons[i, j].FlatStyle = FlatStyle.Flat;
-                    buttons[i, j].Font = new System.Drawing.Font(DefaultFont.FontFamily, 41, FontStyle.Bold);
+                    buttons[i, j] = new Button
+                    {
+                        Size = new Size(150, 150),
+                        Location = new Point(i * 150, j * 150),
+                        FlatStyle = FlatStyle.Flat,
+                        Font = new System.Drawing.Font(DefaultFont.FontFamily, 41, FontStyle.Bold)
+                    };
                     buttons[i, j].Click += new EventHandler(button_click_human);
 
                     panel1.Controls.Add(buttons[i, j]);
@@ -107,7 +109,7 @@ namespace tictactoe
                     if (ai_Player && X_O_display_button.Text == ai)
                     {
                         Minimax ai_minimax = new Minimax();
-                        int[] ai_move = ai_minimax.best(evaluation_Board, buttons, X_O_display_button.Text);
+                        int[] ai_move = ai_minimax.Ai_bestMove(evaluation_Board, buttons, X_O_display_button.Text);
                         evaluation_Board[ai_move[0], ai_move[1]] = ai;
                         buttons[ai_move[0], ai_move[1]].Text = ai;
                         switchPlayer();
@@ -124,9 +126,9 @@ namespace tictactoe
             Minimax ai_minimax = new Minimax();
             if (ai_Player)
             {
-                ai_minimax.checkIfgameEnds(buttons, X_O_display_button.Text, evaluation_Board, ai_Player, playerNumber.Text);
+                ai_minimax.CheckIfgameEnds(buttons, X_O_display_button.Text, evaluation_Board, ai_Player, playerNumber.Text);
             }
-            else ai_minimax.checkIfgameEnds(buttons, X_O_display_button.Text, evaluation_Board, human_Players, playerNumber.Text);
+            else ai_minimax.CheckIfgameEnds(buttons, X_O_display_button.Text, evaluation_Board, human_Players, playerNumber.Text);
 
             if (ai_minimax.gameover)
             {               
@@ -194,7 +196,7 @@ namespace tictactoe
             }
         }
 
-        private void reset_Click(object sender, EventArgs e)          //reset button
+        private void Reset_Click(object sender, EventArgs e)          //reset button
         {           
             Reset();
         }
@@ -203,7 +205,7 @@ namespace tictactoe
         {
             this.panel1.ResetText();
             panel1.Controls.Clear();
-            genButtons();
+            GenButtons();
             
             for (int i = 0; i < 3; i++)
             {
@@ -223,7 +225,7 @@ namespace tictactoe
             {
                 AI_button.BackColor = SystemColors.MenuHighlight;
                 if(ai == "X")
-                    ai_RandomMove();
+                    Ai_RandomMove();
                 if (X_O_display_button.Text != human)
                 {
                     X_O_display_button.Text = human;
@@ -234,7 +236,7 @@ namespace tictactoe
 
         
 
-        private void ai_RandomMove()
+        private void Ai_RandomMove()
         {
             int random_Num1 = random_Move.Next(0, 3);               //random first move after activation or reset
             int random_Num2 = random_Move.Next(0, 3);
@@ -243,7 +245,7 @@ namespace tictactoe
                 if (button.Text != "")
                 {
                     Minimax ai_Minimax = new Minimax();
-                    int[] ai_move = ai_Minimax.best(evaluation_Board, buttons, X_O_display_button.Text);
+                    int[] ai_move = ai_Minimax.Ai_bestMove(evaluation_Board, buttons, X_O_display_button.Text);
                     evaluation_Board[ai_move[0], ai_move[1]] = ai;
                     buttons[ai_move[0], ai_move[1]].Text = ai;
                     switchPlayer();
@@ -280,7 +282,7 @@ namespace tictactoe
             {
                 AI_button.BackColor = SystemColors.MenuHighlight;
                 ai_Player = true;
-                ai_RandomMove();               
+                Ai_RandomMove();               
                 return;
             }
             if (ai_Player)                                               //turns off ai 
@@ -295,7 +297,7 @@ namespace tictactoe
 
         
 
-        private void human_button_Click(object sender, EventArgs e)     // human vs human toggle button
+        private void Human_button_Click(object sender, EventArgs e)     // human vs human toggle button
         {
             if (ai_Player)
             {
@@ -319,19 +321,19 @@ namespace tictactoe
             human_button.BackColor = SystemColors.MenuHighlight;
         }
 
-        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            //saveFileDialog1.CheckFileExists = true;
-            saveFileDialog1.FileName = ".txt";
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog
+            {
+                FileName = ".txt"
+            };
 
             if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
             {
                 return;
             }
-            bool why = saveFileDialog1.OverwritePrompt;
             
-            saveStuff = saveFileDialog1.FileName;
+            SaveRecords = saveFileDialog1.FileName;
             saveFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
             saveFileDialog1.DefaultExt = "txt";
             saveRecord(Xwinslabel.Text, Owinslabel.Text, Tielabel.Text);
@@ -351,8 +353,10 @@ namespace tictactoe
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.DefaultExt = "txt";
+            OpenFileDialog openFileDialog1 = new OpenFileDialog
+            {
+                DefaultExt = "txt"
+            };
             openFileDialog1.ShowDialog();
             string path = openFileDialog1.FileName;
             loadRecord(path);
@@ -382,7 +386,7 @@ namespace tictactoe
         private void saveRecord(string X, string O, string Tie)
         {
             string message = X + "\n" + O + "\n" + Tie;
-            FileStream maybe = new FileStream(saveStuff, FileMode.Create, FileAccess.Write);
+            FileStream maybe = new FileStream(SaveRecords, FileMode.Create, FileAccess.Write);
             StreamWriter writer = new StreamWriter(maybe);
             writer.BaseStream.Seek(0, SeekOrigin.End);
             writer.Write(message);
@@ -398,7 +402,7 @@ namespace tictactoe
         private void player1Choose(string gameMode)
         {
             Choose_piece_form shai = new Choose_piece_form();
-            shai.message(gameMode);
+            shai.Message(gameMode);
             shai.ShowDialog();
 
             if (shai.firstPlayer == null)

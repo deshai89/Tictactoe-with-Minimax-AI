@@ -40,10 +40,11 @@ namespace tictactoe
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetCounterToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.label3 = new System.Windows.Forms.Label();
@@ -53,7 +54,6 @@ namespace tictactoe
             this.Owinslabel = new System.Windows.Forms.Label();
             this.Tielabel = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -93,12 +93,12 @@ namespace tictactoe
             // AI_button
             // 
             this.AI_button.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.AI_button.Location = new System.Drawing.Point(1088, 512);
+            this.AI_button.Location = new System.Drawing.Point(1024, 512);
             this.AI_button.Margin = new System.Windows.Forms.Padding(4);
             this.AI_button.Name = "AI_button";
-            this.AI_button.Size = new System.Drawing.Size(169, 52);
+            this.AI_button.Size = new System.Drawing.Size(264, 52);
             this.AI_button.TabIndex = 3;
-            this.AI_button.Text = "AI";
+            this.AI_button.Text = "AI Vs. Human";
             this.AI_button.UseVisualStyleBackColor = false;
             this.AI_button.Click += new System.EventHandler(this.ai_button_Click);
             // 
@@ -111,7 +111,7 @@ namespace tictactoe
             this.reset_btn.TabIndex = 5;
             this.reset_btn.Text = "Reset";
             this.reset_btn.UseVisualStyleBackColor = true;
-            this.reset_btn.Click += new System.EventHandler(this.reset_Click);
+            this.reset_btn.Click += new System.EventHandler(this.Reset_Click);
             // 
             // human_button
             // 
@@ -119,11 +119,11 @@ namespace tictactoe
             this.human_button.Location = new System.Drawing.Point(1303, 512);
             this.human_button.Margin = new System.Windows.Forms.Padding(4);
             this.human_button.Name = "human_button";
-            this.human_button.Size = new System.Drawing.Size(169, 52);
+            this.human_button.Size = new System.Drawing.Size(264, 52);
             this.human_button.TabIndex = 6;
-            this.human_button.Text = "Human";
+            this.human_button.Text = "Human Vs. Human";
             this.human_button.UseVisualStyleBackColor = false;
-            this.human_button.Click += new System.EventHandler(this.human_button_Click);
+            this.human_button.Click += new System.EventHandler(this.Human_button_Click);
             // 
             // label2
             // 
@@ -169,17 +169,7 @@ namespace tictactoe
             this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
             this.newToolStripMenuItem.Size = new System.Drawing.Size(423, 48);
             this.newToolStripMenuItem.Text = "New Game";
-            this.newToolStripMenuItem.Click += new System.EventHandler(this.reset_Click);
-            // 
-            // openToolStripMenuItem
-            // 
-            this.openToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("openToolStripMenuItem.Image")));
-            this.openToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(423, 48);
-            this.openToolStripMenuItem.Text = "Load Records";
-            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            this.newToolStripMenuItem.Click += new System.EventHandler(this.Reset_Click);
             // 
             // toolStripSeparator
             // 
@@ -194,12 +184,27 @@ namespace tictactoe
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
             this.saveToolStripMenuItem.Size = new System.Drawing.Size(423, 48);
             this.saveToolStripMenuItem.Text = "Save Records";
-            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(420, 6);
+            // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("openToolStripMenuItem.Image")));
+            this.openToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(423, 48);
+            this.openToolStripMenuItem.Text = "Load Records";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(420, 6);
             // 
             // exitToolStripMenuItem
             // 
@@ -293,12 +298,7 @@ namespace tictactoe
             this.panel2.Size = new System.Drawing.Size(823, 287);
             this.panel2.TabIndex = 17;
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(420, 6);
-            // 
-            // Form1
+            // Game_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(15F, 37F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -315,7 +315,7 @@ namespace tictactoe
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "Form1";
+            this.Name = "Game_form";
             this.Text = "TicTacToe";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

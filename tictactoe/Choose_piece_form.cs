@@ -17,14 +17,14 @@ namespace tictactoe
         }
         public string firstPlayer;
         
-        private void choice_Click(object sender, EventArgs e)
+        private void Choice_Click(object sender, EventArgs e)
         {
             Button button = sender as Button;
             firstPlayer = button.Text;
             Close();
         }
 
-        public void message(string gameMode)
+        public void Message(string gameMode)
         {
             if (gameMode == "ai")
                 label1.Text = "Choose your game piece";
